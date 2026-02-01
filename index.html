@@ -30,7 +30,9 @@
     }
 
     #no {
-      position: absolute;
+      position: fixed; /* IMPORTANT: keeps it visible */
+      left: 55%;
+      top: 60%;
       transition: left 0.2s ease, top 0.2s ease;
     }
 
@@ -40,6 +42,7 @@
       margin-top: -5px;
     }
 
+    /* ❤️ Heart explosion */
     .heart {
       position: fixed;
       font-size: 20px;
@@ -48,68 +51,6 @@
     }
 
     @keyframes explode {
-      0% { transform: scale(0); opacity: 1; }
-      100% { transform: scale(1.5) translateY(-120px); opacity: 0; }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="box">
-    <h1>Shannu 💖 Will you be my Valentine?</h1>
-
-    <div>
-      <button id="yes">Yes 💖</button>
-      <div class="forever">Forever yours 💕</div>
-    </div>
-
-    <button id="no">No 💔</button>
-  </div>
-
-  <script>
-    var noBtn = document.getElementById("no");
-    var yesBtn = document.getElementById("yes");
-    var yesScale = 1;
-
-    function moveNo() {
-      var x = Math.random() * (window.innerWidth - 100);
-      var y = Math.random() * (window.innerHeight - 50);
-
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-
-      yesScale += 0.15;
-      yesBtn.style.transform = "scale(" + yesScale + ")";
-    }
-
-    noBtn.addEventListener("mouseover", moveNo);
-    noBtn.addEventListener("touchstart", moveNo);
-
-    yesBtn.addEventListener("click", function () {
-      heartExplosion();
-
-      setTimeout(function () {
-        document.body.innerHTML =
-          "<h1 style='color:red; text-align:center;'>YAY 💕 I knew it!! 😍<br><span style='font-size:22px;'>Forever & Always ❤️</span></h1>";
-      }, 800);
-    });
-
-    function heartExplosion() {
-      for (var i = 0; i < 25; i++) {
-        var heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "❤️";
-
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.top = Math.random() * window.innerHeight + "px";
-
-        document.body.appendChild(heart);
-
-        setTimeout(function () {
-          heart.remove();
-        }, 1200);
-      }
-    }
-  </script>
-</body>
-</html>
+      0% {
+        transform: scale(0);
+        opac
