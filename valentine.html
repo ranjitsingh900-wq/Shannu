@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Be My Valentine?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Georgia, serif;
+      overflow: hidden;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      text-align: center;
+      position: relative;
+      max-width: 90%;
+    }
+    h1 {
+      color: #d6336c;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 18px;
+    }
+    button {
+      padding: 12px 22px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
+    #no {
+      background: #ccc;
+      color: #333;
+      position: absolute;
+    }
+    .heart {
+      position: absolute;
+      color: #ff4d6d;
+      font-size: 22px;
+      animation: float 6s linear infinite;
+      opacity: 0.6;
+    }
+    @keyframes float {
+      from { transform: translateY(100vh); }
+      to { transform: translateY(-10vh); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Sharanvir Kaur Dhillon 💖</h1>
+    <p>
+      You make my world brighter just by being in it.<br><br>
+      Will you be my Valentine? 💘
+    </p>
+
+    <button id="yes" onclick="yes()">Yes 💕</button>
+    <button id="no">No 💔</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+
+    noBtn.addEventListener("touchstart", move);
+    noBtn.addEventListener("mouseover", move);
+
+    function move() {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 80);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    function yes() {
+      document.body.innerHTML = `
+        <div style="
+          height:100vh;
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          align-items:center;
+          background:#ffe6eb;
+          text-align:center;
+          font-family:Georgia;
+          padding:20px;
+        ">
+          <h1 style="color:#d6336c;">You said YES 💍💖</h1>
+          <p style="font-size:20px; max-width:500px;">
+            I’m so lucky to have you, Sharanvir.<br>
+            Happy Valentine’s Day ❤️
+          </p>
+        </div>
+      `;
+    }
+
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 500);
+  </script>
+
+</body>
+</html>
