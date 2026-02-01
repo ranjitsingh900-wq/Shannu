@@ -30,7 +30,7 @@
     }
 
     #no {
-      position: fixed; /* IMPORTANT: keeps it visible */
+      position: fixed;
       left: 55%;
       top: 60%;
       transition: left 0.2s ease, top 0.2s ease;
@@ -42,7 +42,7 @@
       margin-top: -5px;
     }
 
-    /* ❤️ Heart explosion */
+    /* ❤️ Hearts */
     .heart {
       position: fixed;
       font-size: 20px;
@@ -51,6 +51,49 @@
     }
 
     @keyframes explode {
-      0% {
-        transform: scale(0);
-        opac
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(1.5) translateY(-120px); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box" id="content">
+    <h1>Shannu 💖 Will you be my Valentine?</h1>
+
+    <div>
+      <button id="yes">Yes 💖</button>
+      <div class="forever">Forever yours 💕</div>
+    </div>
+
+    <button id="no">No 💔</button>
+  </div>
+
+  <script>
+    var noBtn = document.getElementById("no");
+    var yesBtn = document.getElementById("yes");
+    var content = document.getElementById("content");
+    var yesScale = 1;
+
+    function moveNo() {
+      var x = Math.random() * (window.innerWidth - 100);
+      var y = Math.random() * (window.innerHeight - 50);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      yesScale += 0.15;
+      yesBtn.style.transform = "scale(" + yesScale + ")";
+    }
+
+    noBtn.addEventListener("mouseover", moveNo);
+    noBtn.addEventListener("touchstart", moveNo);
+
+    yesBtn.addEventListener("click", function () {
+      heartExplosion();
+
+      setTimeout(function () {
+        document.body.style.background =
+          "linear-gradient(135deg, #ff5fa2, #ff9a9e)";
+        
+        content.innerHTML =
