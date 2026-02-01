@@ -1,99 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Valentine 💖</title>
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
 
-  <style>
-    body {
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: pink;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-    }
+<style>
+  body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: pink;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
 
-    .box {
-      text-align: center;
-      position: relative;
-    }
+  .box {
+    text-align: center;
+  }
 
-    button {
-      padding: 12px 24px;
-      font-size: 18px;
-      margin: 10px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
+  h1 {
+    margin-bottom: 20px;
+  }
 
-    #no {
-      position: fixed;
-      left: 55%;
-      top: 60%;
-      transition: left 0.2s ease, top 0.2s ease;
-    }
+  button {
+    padding: 12px 24px;
+    font-size: 18px;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
 
-    .forever {
-      font-size: 14px;
-      color: #b0005f;
-      margin-top: -5px;
-    }
+  #no {
+    position: fixed;
+    left: 50%;
+    top: 60%;
+  }
 
-    /* ❤️ Hearts */
-    .heart {
-      position: fixed;
-      font-size: 20px;
-      animation: explode 1.2s ease-out forwards;
-      pointer-events: none;
-    }
+  .forever {
+    font-size: 14px;
+    color: #b0005f;
+    margin-top: -5px;
+  }
 
-    @keyframes explode {
-      0% { transform: scale(0); opacity: 1; }
-      100% { transform: scale(1.5) translateY(-120px); opacity: 0; }
-    }
-  </style>
+  .heart {
+    position: fixed;
+    font-size: 20px;
+    pointer-events: none;
+    animation: explode 1.2s ease-out forwards;
+  }
+
+  @keyframes explode {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(1.5) translateY(-120px); opacity: 0; }
+  }
+</style>
 </head>
 
 <body>
-  <div class="box" id="content">
-    <h1>Shannu 💖 Will you be my Valentine?</h1>
 
-    <div>
-      <button id="yes">Yes 💖</button>
-      <div class="forever">Forever yours 💕</div>
-    </div>
+<div class="box" id="box">
+  <h1>Shannu 💖 Will you be my Valentine?</h1>
 
-    <button id="no">No 💔</button>
+  <div>
+    <button id="yes">Yes 💖</button>
+    <div class="forever">Forever yours 💕</div>
   </div>
 
-  <script>
-    var noBtn = document.getElementById("no");
-    var yesBtn = document.getElementById("yes");
-    var content = document.getElementById("content");
-    var yesScale = 1;
+  <button id="no">No 💔</button>
+</div>
 
-    function moveNo() {
-      var x = Math.random() * (window.innerWidth - 100);
-      var y = Math.random() * (window.innerHeight - 50);
+<script>
+  var noBtn = document.getElementById("no");
+  var yesBtn = document.getElementById("yes");
+  var box = document.getElementById("box");
 
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
+  var yesScale = 1;
 
-      yesScale += 0.15;
-      yesBtn.style.transform = "scale(" + yesScale + ")";
+  function moveNo() {
+    var x = Math.random() * (window.innerWidth - 120);
+    var y = Math.random() * (window.innerHeight - 80);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    yesScale += 0.15;
+    yesBtn.style.transform = "scale(" + yesScale + ")";
+  }
+
+  noBtn.onmouseover = moveNo;
+  noBtn.ontouchstart = moveNo;
+
+  yesBtn.onclick = function () {
+    heartExplosion();
+
+    setTimeout(function () {
+      document.body.style.background =
+        "linear-gradient(135deg, #ff5fa2, #ff9a9e)";
+
+      box.innerHTML =
+        "<h1 style='color:white;'>" +
+        "I knew it!! 😍<br>" +
+        "<span style='font-size:20px;'>– love Raja</span><br>" +
+        "<span style='font-size:22px;'>forever and always 💕</span>" +
+        "</h1>";
+    }, 600);
+  };
+
+  function heartExplosion() {
+    for (var i = 0; i < 30; i++) {
+      var heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = Math.random() * window.innerHeight + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(function (h) {
+        return function () { h.remove(); };
+      }(heart), 1200);
     }
+  }
+</script>
 
-    noBtn.addEventListener("mouseover", moveNo);
-    noBtn.addEventListener("touchstart", moveNo);
-
-    yesBtn.addEventListener("click", function () {
-      heartExplosion();
-
-      setTimeout(function () {
-        document.body.style.background =
-          "linear-gradient(135deg, #ff5fa2, #ff9a9e)";
-        
-        content.innerHTML =
+</body>
+</html>
